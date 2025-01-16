@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, FlatList, Text, Image, StyleSheet, Animated, Pressable } from "react-native";
-import Header from "../components/Header";
-import SearchBar from "../components/SearchBar";
-import { exercises } from "../data/exercises";
+import Header from "../../components/Header";
+import SearchBar from "../../components/SearchBar";
+import { exercises } from "../../data/exercises";
 
 const HomeScreen = ({ navigation }) => {
   const [query, setQuery] = useState("");
@@ -29,9 +29,7 @@ const HomeScreen = ({ navigation }) => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Pressable
-            onPress={() =>
-              navigation.navigate("Details", { exercise: item }) // Koristi navigation za navigaciju
-            }
+            onPress={() => navigation.navigate("Details", { exercise: item })}
           >
             <Animated.View style={styles.card}>
               <Image source={item.image} style={styles.image} />
