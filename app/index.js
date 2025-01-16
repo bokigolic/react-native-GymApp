@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, FlatList, Text, StyleSheet } from "react-native";
-import Header from "../../components/Header";
-import SearchBar from "../../components/SearchBar";
-import { exercises } from "../../data/exercises";
+import { View, FlatList, Text, Image, StyleSheet } from "react-native";
+import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
+import { exercises } from "../data/exercises";
 
 const HomeScreen = () => {
   const [query, setQuery] = useState("");
@@ -32,6 +32,7 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.card}>
+            <Image source={item.image} style={styles.image} />
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.bodyPart}>Target: {item.bodyPart}</Text>
           </View>
@@ -40,6 +41,7 @@ const HomeScreen = () => {
           <Text style={styles.emptyText}>No exercises found.</Text>
         }
       />
+
     </View>
   );
 };
@@ -47,29 +49,37 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8", // Svetlo siva boja za pozadinu
+    backgroundColor: "#f8f8f8",
   },
   card: {
     backgroundColor: "#fff",
-    padding: 20,
+    padding: 15,
     marginVertical: 10,
     marginHorizontal: 15,
-    borderRadius: 15, // Zaobljene ivice
-    shadowColor: "#000", // Senka
+    borderRadius: 15,
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 5 },
-    elevation: 5, // Senka za Android
+    elevation: 5,
+    alignItems: "center", // Centriraj sadržaj
+  },
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 10,
+    marginBottom: 10,
+    resizeMode: "cover", // Prilagodi sliku da popuni okvir
   },
   name: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#333", // Tamno siva
+    color: "#333",
     marginBottom: 8,
   },
   bodyPart: {
     fontSize: 14,
-    color: "#777", // Svetlo siva za opis
+    color: "#777",
   },
   emptyText: {
     textAlign: "center",
